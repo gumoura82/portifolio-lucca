@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth bg-black">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucca Furlan - Fotografia & Filmmaking</title>
+  </head>
+  <body class="bg-black text-white font-sans antialiased selection:bg-white/20 selection:text-white">
+
+    <!-- Header / Nav -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-[1024px] mx-auto px-[40px] md:px-[60px] pt-[20px] pb-[10px] md:pt-[40px] md:pb-[20px] flex items-end justify-between">
+        <a href="#" class="font-bold text-xl uppercase tracking-widest">LUK</a>
+        <nav class="hidden md:flex space-x-6 text-[11px] uppercase tracking-[1px] text-white/40">
+          <a href="#inicio" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Início</a>
+          <a href="#sobre" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Sobre mim</a>
+          <a href="#portfolio" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Portfólio</a>
+          <a href="#contato" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Contato</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden border-b border-white/10">
+      <div class="absolute inset-0 z-0">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-50">
+           <source src="./hero.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-black/30"></div>
+      </div>
+      
+      <div class="relative z-10 text-center px-[40px] md:px-[60px] w-full max-w-[1024px] mx-auto flex flex-col items-start text-left mt-20">
+        <h1 class="text-[60px] sm:text-[80px] md:text-[110px] font-bold leading-[0.85] tracking-[-2px] md:tracking-[-4px] uppercase mb-[10px]">LUCCA<br>FURLAN</h1>
+        <p class="text-[12px] md:text-[14px] text-white/40 tracking-[2px] uppercase">
+          Eu sou um fotógrafo, Filmmaker e estudante em São Paulo, SP
+        </p>
+      </div>
+    </section>
+
+    <!-- Sobre Mim -->
+    <section id="sobre" class="py-24 px-[40px] md:px-[60px] max-w-[1024px] mx-auto border-b border-white/10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-[40px] items-start">
+        <div class="aspect-square bg-[#111] overflow-hidden relative group border border-white/10">
+          <img src="./aboutlucca.png" alt="Lucca Furlan" class="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal hover:opacity-100 transition-all duration-700" />
+        </div>
+        <div class="flex flex-col justify-center h-full">
+          <h2 class="font-serif italic text-[24px] mb-[12px]">Sobre Mim</h2>
+          <div class="space-y-4 text-[15px] leading-[1.6] text-white/40 max-w-[480px]">
+            <p>
+              Sou filmmaker, editor e fotógrafo, estudante de Direção Cinematográfica na AIC. Atuo na produção e pós-produção audiovisual, com expertise em DaVinci Resolve, Premiere e CapCut.
+            </p>
+            <p>
+              Tenho experiência em projetos diversos, incluindo visualizers, reels e fotografia still. Meu diferencial é a versatilidade e o olhar narrativo, garantindo vídeos impactantes e edição de alta qualidade para redes sociais, clipes e campanhas.
+            </p>
+          </div>
+          <div class="mt-[24px] flex flex-col gap-4 text-[11px] text-white/40 uppercase tracking-[1px]">
+            <a href="mailto:lukfurlan06@gmail.com" class="flex items-center space-x-3 hover:text-white transition-colors">
+              <span class="text-white border-b border-white/10 pb-[2px]">lukfurlan06@gmail.com</span>
+            </a>
+            <a href="https://wa.me/5511969000233" target="_blank" class="flex items-center space-x-3 hover:text-white transition-colors">
+              <span class="text-white border-b border-white/10 pb-[2px]">+55 (11) 96900-0233</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfólio (Dinâmico) -->
+    <section id="portfolio" class="py-24 px-[40px] md:px-[60px] max-w-[1024px] mx-auto border-b border-white/10">
+      <div class="mb-[24px]">
+        <h2 class="text-[12px] uppercase tracking-[2px] text-white/40 mb-[16px]">Portfólio</h2>
+        <p class="font-serif italic text-[24px]">Selecione um álbum</p>
+      </div>
+      
+      <!-- Container for Albums Grid -->
+      <div id="albums-container" class="grid grid-cols-1 sm:grid-cols-2 gap-[12px]">
+        <!-- Álbuns serão renderizados aqui pelo JS -->
+      </div>
+      
+      <!-- Container for Album Photos (Hidden by default) -->
+      <div id="gallery-container" class="hidden">
+         <button id="back-to-albums" class="mb-8 flex items-center space-x-2 text-[11px] uppercase tracking-[1px] text-white/40 hover:text-white transition-colors cursor-pointer border-b border-white/10 pb-[2px]">
+           <span>← Voltar aos Álbuns</span>
+         </button>
+         <h3 id="gallery-title" class="font-serif italic text-[24px] mb-[24px]">Nome do Álbum</h3>
+         <div id="gallery-grid" class="masonry-grid">
+           <!-- Fotos do álbum serão renderizadas aqui -->
+         </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-24 px-[40px] md:px-[60px] max-w-[1024px] mx-auto border-b border-white/10">
+      <div class="mb-[16px]">
+        <h2 class="text-[12px] uppercase tracking-[2px] text-white/40 mb-[16px]">Inicie um projeto</h2>
+      </div>
+
+      <div class="max-w-[480px]">
+        <form id="contact-form" class="space-y-[12px]">
+          <input type="text" id="name" required class="w-full h-[40px] border border-white/10 bg-transparent px-[12px] text-[13px] text-white focus:outline-none focus:border-white/40 transition-colors" placeholder="Nome Completo" />
+          <input type="email" id="email" required class="w-full h-[40px] border border-white/10 bg-transparent px-[12px] text-[13px] text-white focus:outline-none focus:border-white/40 transition-colors" placeholder="E-mail" />
+          <textarea id="message" required rows="4" class="w-full border border-white/10 bg-transparent px-[12px] py-[10px] text-[13px] text-white focus:outline-none focus:border-white/40 transition-colors resize-none" placeholder="Mensagem"></textarea>
+          <button type="submit" class="w-full h-[40px] bg-white text-black font-bold uppercase text-[12px] flex items-center justify-center hover:bg-neutral-200 transition-colors cursor-pointer mt-[16px]">
+            Enviar Mensagem
+          </button>
+        </form>
+        
+        <div class="mt-12 flex gap-[20px] text-[11px] text-white/40 uppercase">
+          <a href="https://wa.me/5511969000233" target="_blank" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">WhatsApp</a>
+          <a href="mailto:lukfurlan06@gmail.com" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">E-mail</a>
+          <a href="#" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-[40px] text-[11px] text-white/40 uppercase tracking-[1px] px-[40px] md:px-[60px] max-w-[1024px] mx-auto text-left">
+      <p>&copy; 2024 Lucca Furlan.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-[#111] text-white px-6 py-4 border border-white/10 transform translate-y-24 opacity-0 transition-all duration-300 z-50 flex items-center space-x-3">
+      <span class="text-white">ℹ️</span>
+      <div>
+        <p class="font-bold text-[12px] uppercase">Aviso</p>
+        <p class="text-[13px] text-white/40">Formulário em desenvolvimento. Por favor, entre em contato via WhatsApp ou E-mail.</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/script.ts"></script>
+  </body>
+</html>
