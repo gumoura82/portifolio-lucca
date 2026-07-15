@@ -5,6 +5,13 @@ export interface Album {
   photos: string[];
 }
 
+// INSTRUÇÕES PARA ADICIONAR FOTOS LOCAIS:
+// 1. Coloque as imagens dentro da pasta "public/fotos" (crie a pasta "fotos" se precisar).
+// 2. Substitua o link (https://...) por "./fotos/nome-da-sua-foto.jpg".
+// Exemplo:
+// coverImage: './fotos/capa-noturna.jpg',
+// photos: ['./fotos/foto1.jpg', './fotos/foto2.jpg']
+
 export const albuns: Album[] = [
   {
     id: 'album-1',

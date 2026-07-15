@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       albumCard.className = 'group relative aspect-square bg-[#111] border border-white/10 flex items-end p-[12px] cursor-pointer overflow-hidden';
       
       albumCard.innerHTML = `
-        <img src="${album.coverImage}" alt="${album.title}" class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700 group-hover:scale-105" loading="lazy" />
+        <img src="${album.coverImage}" alt="${album.title}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105" loading="lazy" />
         <div class="relative z-10">
           <span class="text-[11px] uppercase tracking-[1px] text-white bg-black/50 px-2 py-1 border border-white/10 backdrop-blur-sm">0${index + 1}. ${album.title}</span>
         </div>
