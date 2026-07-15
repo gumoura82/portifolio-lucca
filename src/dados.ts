@@ -1,8 +1,10 @@
 export interface Album {
   id: string;
   title: string;
+  subtitle?: string;
   coverImage: string;
   photos: string[];
+  video?: string;
 }
 
 // INSTRUÇÕES PARA ADICIONAR FOTOS LOCAIS:
@@ -11,11 +13,17 @@ export interface Album {
 // Exemplo:
 // coverImage: './fotos/capa-noturna.jpg',
 // photos: ['./fotos/foto1.jpg', './fotos/foto2.jpg']
+//
+// PARA ADICIONAR UM VÍDEO DO YOUTUBE NO ÁLBUM:
+// Use a propriedade "video" colocando o link do YouTube (ex: "https://www.youtube.com/watch?v=...").
+// Você pode usar SOMENTE vídeo, SOMENTE fotos, ou OS DOIS no mesmo álbum!
+// Para adicionar um subtítulo, use a propriedade "subtitle".
 
 export const albuns: Album[] = [
   {
     id: 'album-1',
     title: 'Retratos Noturnos',
+    subtitle: 'Luzes da cidade e neon em São Paulo',
     coverImage: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000&auto=format&fit=crop',
     photos: [
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop',
@@ -23,6 +31,17 @@ export const albuns: Album[] = [
       'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop'
     ]
+  },
+  {
+    id: 'album-reel',
+    title: 'Cinematic Reel',
+    subtitle: 'Direção de fotografia e edição',
+    coverImage: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000&auto=format&fit=crop',
+    photos: [
+      'https://images.unsplash.com/photo-1559534747-b6ea1cae1c88?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800&auto=format&fit=crop'
+    ],
+    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: 'album-2',

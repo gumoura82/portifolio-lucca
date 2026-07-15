@@ -35,26 +35,66 @@ document.addEventListener('DOMContentLoaded', () => {
       const album = albuns.find(a => a.id === albumId);
       if (!album) return;
 
-      // Atualizar título
+      // Atualizar título e subtítulo
       galleryTitle!.textContent = album.title;
+      const gallerySubtitle = document.getElementById('gallery-subtitle');
+      if (album.subtitle && gallerySubtitle) {
+        gallerySubtitle.textContent = album.subtitle;
+        gallerySubtitle.classList.remove('hidden');
+      } else if (gallerySubtitle) {
+        gallerySubtitle.classList.add('hidden');
+      }
 
       // Limpar grid de fotos
       galleryGrid!.innerHTML = '';
+      galleryGrid!.className = 'w-full flex flex-col gap-[40px]';
 
-      // Adicionar fotos (Masonry)
-      album.photos.forEach((photoUrl, index) => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'mb-[12px] break-inside-avoid';
+      // 1. Adicionar Vídeo (se houver)
+      if (album.video) {
+        let videoUrl = album.video;
+        // Transformar link padrão do youtube em embed se necessário
+        if (videoUrl.includes('youtube.com/watch?v=')) {
+          const videoId = videoUrl.split('v=')[1].split('&')[0];
+          videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        } else if (videoUrl.includes('youtu.be/')) {
+          const videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+          videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        }
+
+        const videoWrapper = document.createElement('div');
+        videoWrapper.className = 'w-full flex items-center justify-center';
+
+        const iframe = document.createElement('iframe');
+        iframe.src = videoUrl;
+        iframe.className = 'w-full max-w-4xl aspect-video bg-[#111] border border-white/10';
+        iframe.allowFullscreen = true;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         
-        const img = document.createElement('img');
-        img.src = photoUrl;
-        img.alt = `${album.title} - Foto ${index + 1}`;
-        img.className = 'w-full bg-[#111] border border-white/10';
-        img.loading = 'lazy';
+        videoWrapper.appendChild(iframe);
+        galleryGrid!.appendChild(videoWrapper);
+      }
+
+      // 2. Adicionar Fotos (se houver)
+      if (album.photos && album.photos.length > 0) {
+        const masonryGrid = document.createElement('div');
+        masonryGrid.className = 'masonry-grid w-full';
         
-        wrapper.appendChild(img);
-        galleryGrid!.appendChild(wrapper);
-      });
+        album.photos.forEach((photoUrl, index) => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'mb-[12px] break-inside-avoid';
+          
+          const img = document.createElement('img');
+          img.src = photoUrl;
+          img.alt = `${album.title} - Foto ${index + 1}`;
+          img.className = 'w-full bg-[#111] border border-white/10';
+          img.loading = 'lazy';
+          
+          wrapper.appendChild(img);
+          masonryGrid.appendChild(wrapper);
+        });
+        
+        galleryGrid!.appendChild(masonryGrid);
+      }
 
       // Transição de tela
       albumsContainer!.classList.add('hidden');
