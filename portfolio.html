@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth bg-black">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfólio - Lucca Furlan</title>
+  </head>
+  <body class="bg-black text-white font-sans antialiased selection:bg-white/20 selection:text-white">
+
+    <!-- Header / Nav -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-[1024px] mx-auto px-[40px] md:px-[60px] pt-[20px] pb-[10px] md:pt-[40px] md:pb-[20px] flex items-end justify-between">
+        <a href="index.html" class="font-bold text-xl uppercase tracking-widest">LUK</a>
+        <nav class="hidden md:flex space-x-6 text-[11px] uppercase tracking-[1px] text-white/40">
+          <a href="index.html#inicio" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Início</a>
+          <a href="index.html#sobre" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Sobre mim</a>
+          <a href="portfolio.html" class="text-white border-b border-white pb-[2px]">Portfólio</a>
+          <a href="index.html#contato" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Contato</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-[100px] md:pt-[140px] min-h-screen">
+      <!-- Portfólio (Dinâmico) -->
+      <section id="portfolio" class="py-12 md:py-24 px-[40px] md:px-[60px] max-w-[1024px] mx-auto">
+        <div class="mb-[24px]">
+          <h2 class="text-[12px] uppercase tracking-[2px] text-white/40 mb-[16px]">Portfólio</h2>
+          <p class="font-serif italic text-[24px]">Selecione um álbum</p>
+        </div>
+        
+        <!-- Container for Albums Grid -->
+        <div id="albums-container" class="grid grid-cols-1 sm:grid-cols-2 gap-[12px]">
+          <!-- Álbuns serão renderizados aqui pelo JS -->
+        </div>
+        
+        <!-- Container for Album Photos (Hidden by default) -->
+        <div id="gallery-container" class="hidden">
+           <button id="back-to-albums" class="mb-8 flex items-center space-x-2 text-[11px] uppercase tracking-[1px] text-white/40 hover:text-white transition-colors cursor-pointer border-b border-white/10 pb-[2px]">
+             <span>← Voltar aos Álbuns</span>
+           </button>
+           <h3 id="gallery-title" class="font-serif italic text-[24px] mb-[8px]">Nome do Álbum</h3>
+           <p id="gallery-subtitle" class="text-[13px] text-white/40 mb-[24px] hidden">Subtítulo</p>
+           <div id="gallery-grid" class="masonry-grid">
+             <!-- Fotos do álbum serão renderizadas aqui -->
+           </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-[40px] text-[11px] text-white/40 uppercase tracking-[1px] px-[40px] md:px-[60px] max-w-[1024px] mx-auto text-left border-t border-white/10">
+      <p>&copy; 2024 Lucca Furlan.</p>
+    </footer>
+
+    <script type="module" src="/src/script.ts"></script>
+  </body>
+</html>
