@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const albumCard = document.createElement('div');
-        albumCard.className = 'group relative aspect-square bg-[#111] border border-white/10 flex items-end p-[12px] cursor-pointer overflow-hidden reveal';
+        albumCard.className = 'group relative aspect-video bg-[#111] border border-white/10 flex items-end p-6 cursor-pointer overflow-hidden reveal';
         // Add a slight delay based on index
         const delayClass = index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : '';
         if (delayClass) albumCard.classList.add(delayClass);
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         albumCard.innerHTML = `
           ${finalCoverImage ? `<img src="${finalCoverImage}" alt="${album.title}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105" loading="lazy" referrerpolicy="no-referrer" onerror="${fallbackScript}" />` : '<div class="absolute inset-0 w-full h-full bg-black/50 flex items-center justify-center text-white/50 text-[10px]">SEM CAPA</div>'}
           <div class="relative z-10">
-            <span class="text-[11px] uppercase tracking-[1px] text-white bg-black/50 px-2 py-1 border border-white/10 backdrop-blur-sm">0${index + 1}. ${album.title}</span>
+            <span class="text-[12px] uppercase tracking-[1.5px] font-semibold text-white bg-black/60 px-4 py-2 border border-white/10 backdrop-blur-md shadow-lg">0${index + 1}. ${album.title}</span>
           </div>
         `;
 
