@@ -5,45 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lucca Furlan - Fotografia & Filmmaking</title>
   </head>
-  <body class="bg-black text-white font-sans antialiased selection:bg-white/20 selection:text-white">
+  <body class="bg-black text-white font-sans antialiased selection:bg-white/20 selection:text-white animate-fade-in">
 
     <!-- Header / Nav -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-      <div class="max-w-[1024px] mx-auto px-[40px] md:px-[60px] pt-[20px] pb-[10px] md:pt-[40px] md:pb-[20px] flex items-end justify-between">
-        <a href="#" class="font-bold text-xl uppercase tracking-widest">LUK</a>
-        <nav class="hidden md:flex space-x-6 text-[11px] uppercase tracking-[1px] text-white/40">
-          <a href="#inicio" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Início</a>
-          <a href="#sobre" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Sobre mim</a>
-          <a href="portfolio.html" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Portfólio</a>
-          <a href="#contato" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Contato</a>
-        </nav>
+    <header class="absolute top-0 left-0 w-full z-50 bg-transparent" id="main-header">
+      <div class="max-w-[1440px] mx-auto px-[40px] md:px-[80px] pt-[50px] pb-[30px] flex items-center justify-between">
+        <!-- Left Side (Socials + Links) -->
+        <div class="flex items-center space-x-8">
+          <div class="flex items-center space-x-5">
+            <a href="https://www.instagram.com/luccafurlan_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="hover:text-white/70 transition-colors drop-shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+          </div>
+          <nav class="hidden md:flex space-x-2 text-[13px] font-semibold tracking-wide text-white drop-shadow-md">
+            <a href="#inicio" class="px-3 py-1.5 border border-white transition-colors">HOME</a>
+            <a href="#sobre" class="px-3 py-1.5 border border-transparent hover:border-white transition-colors">BIO</a>
+          </nav>
+        </div>
+
+        <!-- Center (Logo) -->
+        <div class="absolute left-1/2 -translate-x-1/2">
+           <a href="#inicio" class="font-serif text-[18px] font-bold tracking-wider text-white drop-shadow-md whitespace-nowrap">Lucca Furlan</a>
+        </div>
+
+        <!-- Right Side (Links) -->
+        <div class="flex items-center">
+          <nav class="hidden md:flex space-x-2 text-[13px] font-semibold tracking-wide text-white drop-shadow-md">
+            <a href="portfolio.html" class="px-3 py-1.5 border border-transparent hover:border-white transition-colors">PORTFÓLIO</a>
+            <a href="#contato" class="px-3 py-1.5 border border-transparent hover:border-white transition-colors">CONTATO</a>
+          </nav>
+          
+          <!-- Mobile Menu Button -->
+          <button id="mobile-menu-btn" class="md:hidden text-white hover:text-white/70 transition-colors drop-shadow-md z-50 relative ml-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+        </div>
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden border-b border-white/10">
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-md z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+      <nav class="flex flex-col items-center space-y-6 text-[18px] font-semibold tracking-wide text-white">
+        <a href="#inicio" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">HOME</a>
+        <a href="#sobre" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">BIO</a>
+        <a href="portfolio.html" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">PORTFÓLIO</a>
+        <a href="#contato" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">CONTATO</a>
+      </nav>
+    </div>    <!-- Hero Section -->
+    <section id="inicio" class="relative h-screen flex items-center overflow-hidden border-b border-white/10">
       <div class="absolute inset-0 z-0">
-        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-50">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
            <source src="./hero.mp4" type="video/mp4" />
         </video>
-        <div class="absolute inset-0 bg-black/30"></div>
       </div>
       
-      <div class="relative z-10 text-center px-[40px] md:px-[60px] w-full max-w-[1024px] mx-auto flex flex-col items-start text-left mt-20">
-        <h1 class="text-[60px] sm:text-[80px] md:text-[110px] font-bold leading-[0.85] tracking-[-2px] md:tracking-[-4px] uppercase mb-[10px]">LUCCA<br>FURLAN</h1>
-        <p class="text-[12px] md:text-[14px] text-white/40 tracking-[2px] uppercase">
-          Eu sou um fotógrafo, Filmmaker e estudante em São Paulo, SP
-        </p>
+      <div class="relative z-10 px-[40px] md:px-[80px] w-full max-w-[1440px] mx-auto flex flex-col items-start text-left mt-20">
+        <div class="inline-block mb-2 md:mb-4 drop-shadow-lg reveal">
+          <h1 class="font-serif text-[48px] md:text-[64px] tracking-wide text-white leading-none">Lucca Furlan</h1>
+        </div>
+        <div class="inline-block drop-shadow-lg reveal delay-200">
+          <p class="text-[13px] md:text-[15px] tracking-[1px] text-white font-medium">
+            Eu sou um fotógrafo, Filmmaker e estudante em São Paulo, SP
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- Sobre Mim -->
     <section id="sobre" class="py-24 px-[40px] md:px-[60px] max-w-[1024px] mx-auto border-b border-white/10">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-[40px] items-start">
-        <div class="aspect-square bg-[#111] overflow-hidden relative group border border-white/10">
-          <img src="./aboutlucca.png" alt="Lucca Furlan" class="w-full h-full object-cover transition-all duration-700 hover:scale-105" />
+        <div class="aspect-square bg-[#111] overflow-hidden relative group border border-white/10 reveal">
+          <img src="./aboutlucca.png" alt="Lucca Furlan" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" />
         </div>
-        <div class="flex flex-col justify-center h-full">
+        <div class="flex flex-col justify-center h-full reveal delay-200">
           <h2 class="font-serif italic text-[24px] mb-[12px]">Sobre Mim</h2>
           <div class="space-y-4 text-[15px] leading-[1.6] text-white/40 max-w-[480px]">
             <p>
@@ -60,7 +94,7 @@
             <a href="https://wa.me/5511969000233" target="_blank" class="flex items-center space-x-3 hover:text-white transition-colors">
               <span class="text-white border-b border-white/10 pb-[2px]">+55 (11) 96900-0233</span>
             </a>
-            <a href="#" target="_blank" class="flex items-center space-x-3 hover:text-white transition-colors">
+            <a href="https://www.instagram.com/luccafurlan_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="flex items-center space-x-3 hover:text-white transition-colors">
               <span class="text-white border-b border-white/10 pb-[2px]">Instagram</span>
             </a>
           </div>
@@ -70,11 +104,10 @@
 
     <!-- Contato -->
     <section id="contato" class="py-24 px-[40px] md:px-[60px] max-w-[1024px] mx-auto border-b border-white/10">
-      <div class="mb-[16px]">
+      <div class="mb-[16px] reveal">
         <h2 class="text-[12px] uppercase tracking-[2px] text-white/40 mb-[16px]">Inicie um projeto</h2>
       </div>
-
-      <div class="max-w-[480px]">
+      <div class="max-w-[480px] reveal delay-200">
         <form id="contact-form" class="space-y-[12px]">
           <input type="text" id="name" required class="w-full h-[40px] border border-white/10 bg-transparent px-[12px] text-[13px] text-white focus:outline-none focus:border-white/40 transition-colors" placeholder="Nome Completo" />
           <input type="email" id="email" required class="w-full h-[40px] border border-white/10 bg-transparent px-[12px] text-[13px] text-white focus:outline-none focus:border-white/40 transition-colors" placeholder="E-mail" />
@@ -87,15 +120,16 @@
         <div class="mt-12 flex gap-[20px] text-[11px] text-white/40 uppercase">
           <a href="https://wa.me/5511969000233" target="_blank" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">WhatsApp</a>
           <a href="mailto:lukfurlan06@gmail.com" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">E-mail</a>
-          <a href="#" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">LinkedIn</a>
-          <a href="#" target="_blank" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">Instagram</a>
+          <a href="https://www.linkedin.com/in/lucca-de-oliveira-0bb966351/" target="_blank" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">LinkedIn</a>
+          <a href="https://www.instagram.com/luccafurlan_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-white text-decoration-none border-b border-white/10 pb-[2px] hover:border-white/40 transition-colors">Instagram</a>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-[40px] text-[11px] text-white/40 uppercase tracking-[1px] px-[40px] md:px-[60px] max-w-[1024px] mx-auto text-left">
-      <p>&copy; 2024 Lucca Furlan.</p>
+    <footer class="py-[40px] text-[11px] text-white/40 uppercase tracking-[1px] px-[40px] md:px-[60px] max-w-[1024px] mx-auto text-left flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <p>&copy; 2026 Lucca Furlan.</p>
+      <p>Desenvolvido por <a href="https://www.linkedin.com/in/gumoura82" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors underline decoration-white/20 underline-offset-4">Gustavo Moura</a></p>
     </footer>
 
     <!-- Toast Notification -->

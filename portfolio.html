@@ -5,28 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfólio - Lucca Furlan</title>
   </head>
-  <body class="bg-black text-white font-sans antialiased selection:bg-white/20 selection:text-white">
+  <body class="bg-black text-white font-sans antialiased selection:bg-white/20 selection:text-white animate-fade-in">
 
     <!-- Header / Nav -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-      <div class="max-w-[1024px] mx-auto px-[40px] md:px-[60px] pt-[20px] pb-[10px] md:pt-[40px] md:pb-[20px] flex items-end justify-between">
-        <a href="index.html" class="font-bold text-xl uppercase tracking-widest">LUK</a>
-        <nav class="hidden md:flex space-x-6 text-[11px] uppercase tracking-[1px] text-white/40">
-          <a href="index.html#inicio" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Início</a>
-          <a href="index.html#sobre" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Sobre mim</a>
-          <a href="portfolio.html" class="text-white border-b border-white pb-[2px]">Portfólio</a>
-          <a href="index.html#contato" class="hover:text-white transition-colors border-b border-transparent hover:border-white/10 pb-[2px]">Contato</a>
-        </nav>
+    <header class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10" id="main-header">
+      <div class="max-w-[1440px] mx-auto px-[40px] md:px-[80px] pt-[50px] pb-[30px] flex items-center justify-between">
+        <!-- Left Side (Socials + Links) -->
+        <div class="flex items-center space-x-8">
+          <div class="flex items-center space-x-5">
+            <a href="https://www.instagram.com/luccafurlan_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="hover:text-white/70 transition-colors drop-shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+          </div>
+          <nav class="hidden md:flex space-x-2 text-[13px] font-semibold tracking-wide text-white drop-shadow-md">
+            <a href="index.html#inicio" class="px-3 py-1.5 border border-transparent hover:border-white transition-colors">HOME</a>
+            <a href="index.html#sobre" class="px-3 py-1.5 border border-transparent hover:border-white transition-colors">BIO</a>
+          </nav>
+        </div>
+
+        <!-- Center (Logo) -->
+        <div class="absolute left-1/2 -translate-x-1/2">
+           <a href="index.html#inicio" class="font-serif text-[18px] font-bold tracking-wider text-white drop-shadow-md whitespace-nowrap">Lucca Furlan</a>
+        </div>
+
+        <!-- Right Side (Links) -->
+        <div class="flex items-center">
+          <nav class="hidden md:flex space-x-2 text-[13px] font-semibold tracking-wide text-white drop-shadow-md">
+            <a href="portfolio.html" class="px-3 py-1.5 border border-white transition-colors">PORTFÓLIO</a>
+            <a href="index.html#contato" class="px-3 py-1.5 border border-transparent hover:border-white transition-colors">CONTATO</a>
+          </nav>
+          
+          <!-- Mobile Menu Button -->
+          <button id="mobile-menu-btn" class="md:hidden text-white hover:text-white/70 transition-colors drop-shadow-md z-50 relative ml-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+        </div>
       </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-md z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+      <nav class="flex flex-col items-center space-y-6 text-[18px] font-semibold tracking-wide text-white">
+        <a href="index.html#inicio" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">HOME</a>
+        <a href="index.html#sobre" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">BIO</a>
+        <a href="portfolio.html" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">PORTFÓLIO</a>
+        <a href="index.html#contato" class="mobile-link px-4 py-2 border border-transparent hover:border-white transition-colors">CONTATO</a>
+      </nav>
+    </div>
 
     <!-- Main Content -->
     <main class="pt-[100px] md:pt-[140px] min-h-screen">
       <!-- Portfólio (Dinâmico) -->
       <section id="portfolio" class="py-12 md:py-24 px-[40px] md:px-[60px] max-w-[1024px] mx-auto">
-        <div class="mb-[24px]">
-          <h2 class="text-[12px] uppercase tracking-[2px] text-white/40 mb-[16px]">Portfólio</h2>
-          <p class="font-serif italic text-[24px]">Selecione um álbum</p>
+        <div class="mb-[24px] flex flex-col md:flex-row md:items-end justify-between gap-6 reveal">
+          <div>
+            <h2 class="text-[12px] uppercase tracking-[2px] text-white/40 mb-[16px]">Portfólio</h2>
+            <p class="font-serif italic text-[24px]">Selecione um álbum</p>
+          </div>
+          
+          <!-- Filtros -->
+          <div class="flex gap-4 border-b border-white/20 pb-2">
+            <button class="filter-btn active text-white text-[11px] uppercase tracking-wider font-semibold border-b-2 border-white pb-1 transition-colors" data-filter="all">TUDO</button>
+            <button class="filter-btn text-white/50 hover:text-white text-[11px] uppercase tracking-wider font-semibold border-b-2 border-transparent hover:border-white/50 transition-colors" data-filter="photos">FOTOS</button>
+            <button class="filter-btn text-white/50 hover:text-white text-[11px] uppercase tracking-wider font-semibold border-b-2 border-transparent hover:border-white/50 transition-colors" data-filter="videos">VÍDEOS</button>
+          </div>
         </div>
         
         <!-- Container for Albums Grid -->
@@ -49,8 +91,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-[40px] text-[11px] text-white/40 uppercase tracking-[1px] px-[40px] md:px-[60px] max-w-[1024px] mx-auto text-left border-t border-white/10">
-      <p>&copy; 2024 Lucca Furlan.</p>
+    <footer class="py-[40px] text-[11px] text-white/40 uppercase tracking-[1px] px-[40px] md:px-[60px] max-w-[1024px] mx-auto text-left border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <p>&copy; 2026 Lucca Furlan.</p>
+      <p>Desenvolvido por <a href="https://www.linkedin.com/in/gumoura82" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors underline decoration-white/20 underline-offset-4">Gustavo Moura</a></p>
     </footer>
 
     <script type="module" src="/src/script.ts"></script>

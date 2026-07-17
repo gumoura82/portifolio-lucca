@@ -2,7 +2,7 @@ import './index.css';
 import { albuns } from './dados';
 
 // Cole a URL gerada no Google Apps Script aqui dentro das aspas:
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRORMK6C4H4V0bTrIzL3NpAHc3vrsNJqgpV5QeTUEf_6TarD-GyC8IYw96Z9lQlVJh/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxv2pPiIHnSddGkR6bq45Xdc6xpELlN270TIdhHL0Kgfv161o_ZgZljJEIxz0dzWFLn/exec';
 
 // Função mágica para contornar o erro de CORS (Bloqueio do Navegador) usando JSONP
 function fetchJSONP(url: string): Promise<any> {
@@ -30,6 +30,57 @@ function fetchJSONP(url: string): Promise<any> {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // --- Intersection Observer for animations ---
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // --- Mobile Menu Logic ---
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('opacity-0');
+      mobileMenu.classList.toggle('pointer-events-none');
+      
+      const svg = mobileMenuBtn.querySelector('svg');
+      if (svg) {
+        if (mobileMenu.classList.contains('opacity-0')) {
+          svg.innerHTML = '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>';
+        } else {
+          svg.innerHTML = '<line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/>';
+        }
+      }
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('opacity-0');
+        mobileMenu.classList.add('pointer-events-none');
+        const svg = mobileMenuBtn.querySelector('svg');
+        if (svg) {
+          svg.innerHTML = '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>';
+        }
+      });
+    });
+  }
+
+  // Header scroll logic removido
+
   // --- Portfólio / Álbuns Logic ---
   const albumsContainer = document.getElementById('albums-container');
   const galleryContainer = document.getElementById('gallery-container');
@@ -41,7 +92,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     let todosAlbuns = [...albuns];
 
     if (APPS_SCRIPT_URL) {
-      albumsContainer.innerHTML = '<p class="text-white/50 text-[13px] uppercase tracking-[1px] col-span-full text-center py-10">Sincronizando álbuns do Google Drive...</p>';
+      albumsContainer.innerHTML = `
+        <div class="col-span-full text-center py-16 flex flex-col items-center justify-center space-y-6">
+          <div class="relative w-16 h-16 flex items-center justify-center">
+            <div class="absolute inset-0 border-t-2 border-white/20 border-solid rounded-full animate-spin"></div>
+            <div class="absolute inset-2 border-r-2 border-white/40 border-solid rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+            <div class="absolute inset-4 border-b-2 border-white border-solid rounded-full animate-spin" style="animation-duration: 2s;"></div>
+          </div>
+          <div class="flex flex-col items-center space-y-2">
+            <p class="text-white text-[12px] uppercase tracking-[3px] font-semibold flex items-center gap-2">
+              Sincronizando
+              <span class="flex space-x-1">
+                <span class="w-1 h-1 bg-white rounded-full animate-bounce"></span>
+                <span class="w-1 h-1 bg-white rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
+                <span class="w-1 h-1 bg-white rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+              </span>
+            </p>
+            <p class="text-white/40 text-[10px] uppercase tracking-[2px]">Conectando ao Google Drive</p>
+          </div>
+        </div>
+      `;
       try {
         // Agora usamos o JSONP ao invés do fetch normal
         const driveAlbuns = await fetchJSONP(APPS_SCRIPT_URL);
@@ -51,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const fixDriveUrl = (url: string) => {
           if (url && url.includes('drive.google.com/uc?export=view&id=')) {
              const id = url.split('id=')[1].split('&')[0];
-             return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+             return `https://drive.google.com/thumbnail?id=${id}&sz=s1000`;
           }
           return url;
         };
@@ -79,27 +149,93 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
-    // 1. Renderizar os álbuns
-    todosAlbuns.forEach((album, index) => {
-      const albumCard = document.createElement('div');
-      albumCard.className = 'group relative aspect-square bg-[#111] border border-white/10 flex items-end p-[12px] cursor-pointer overflow-hidden';
-      
-      albumCard.innerHTML = `
-        <img src="${album.coverImage}" alt="${album.title}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105" loading="lazy" referrerpolicy="no-referrer" />
-        <div class="relative z-10">
-          <span class="text-[11px] uppercase tracking-[1px] text-white bg-black/50 px-2 py-1 border border-white/10 backdrop-blur-sm">0${index + 1}. ${album.title}</span>
-        </div>
-      `;
+    // 1. Lógica de Filtro
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    let currentFilter = 'all';
 
-      // Evento de clique para abrir o álbum
-      albumCard.addEventListener('click', () => {
-        openAlbum(album.id);
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // Atualizar botões
+        filterBtns.forEach(b => {
+          b.classList.remove('text-white', 'border-white');
+          b.classList.add('text-white/50', 'border-transparent');
+        });
+        
+        const targetBtn = e.currentTarget as HTMLButtonElement;
+        targetBtn.classList.remove('text-white/50', 'border-transparent');
+        targetBtn.classList.add('text-white', 'border-white');
+        
+        currentFilter = targetBtn.dataset.filter || 'all';
+        renderAlbums();
       });
-
-      albumsContainer.appendChild(albumCard);
     });
 
-    // 2. Lógica de abrir e fechar álbum
+    // 2. Renderizar os álbuns
+    function renderAlbums() {
+      albumsContainer.innerHTML = '';
+      
+      const filteredAlbums = todosAlbuns.filter(album => {
+        if (currentFilter === 'all') return true;
+        if (currentFilter === 'photos') return album.photos && album.photos.length > 0;
+        if (currentFilter === 'videos') return !!album.video;
+        return true;
+      });
+
+      filteredAlbums.forEach((album, index) => {
+        let finalCoverImage = album.coverImage;
+        
+        // Se não tem capa, mas tem vídeo, tentar extrair a thumb do youtube
+        if (!finalCoverImage && album.video) {
+          let videoId = '';
+          if (album.video.includes('youtube.com/watch?v=')) {
+            videoId = album.video.split('v=')[1].split('&')[0];
+          } else if (album.video.includes('youtu.be/')) {
+            videoId = album.video.split('youtu.be/')[1].split('?')[0];
+          }
+          if (videoId) {
+            finalCoverImage = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+          }
+        }
+
+        const albumCard = document.createElement('div');
+        albumCard.className = 'group relative aspect-square bg-[#111] border border-white/10 flex items-end p-[12px] cursor-pointer overflow-hidden reveal';
+        // Add a slight delay based on index
+        const delayClass = index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : '';
+        if (delayClass) albumCard.classList.add(delayClass);
+        
+        const videoIdForFallback = album.video ? (album.video.includes('v=') ? album.video.split('v=')[1].split('&')[0] : (album.video.includes('youtu.be/') ? album.video.split('youtu.be/')[1].split('?')[0] : '')) : '';
+        const fallbackScript = videoIdForFallback && !album.coverImage ? `this.onerror=null; this.src='https://img.youtube.com/vi/${videoIdForFallback}/mqdefault.jpg';` : '';
+
+        albumCard.innerHTML = `
+          ${finalCoverImage ? `<img src="${finalCoverImage}" alt="${album.title}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105" loading="lazy" referrerpolicy="no-referrer" onerror="${fallbackScript}" />` : '<div class="absolute inset-0 w-full h-full bg-black/50 flex items-center justify-center text-white/50 text-[10px]">SEM CAPA</div>'}
+          <div class="relative z-10">
+            <span class="text-[11px] uppercase tracking-[1px] text-white bg-black/50 px-2 py-1 border border-white/10 backdrop-blur-sm">0${index + 1}. ${album.title}</span>
+          </div>
+        `;
+
+        // Evento de clique para abrir o álbum
+        albumCard.addEventListener('click', () => {
+          openAlbum(album.id);
+        });
+
+        albumsContainer.appendChild(albumCard);
+        // Observe this dynamically generated element
+        observer.observe(albumCard);
+      });
+      
+      if (filteredAlbums.length === 0) {
+        albumsContainer.innerHTML = `
+          <div class="col-span-full text-center py-10">
+            <p class="text-white/40 text-[13px] uppercase tracking-[1px]">Nenhum álbum encontrado nesta categoria.</p>
+          </div>
+        `;
+      }
+    }
+
+    // Chamada inicial
+    renderAlbums();
+
+    // 3. Lógica de abrir e fechar álbum
     function openAlbum(albumId: string) {
       const album = todosAlbuns.find(a => a.id === albumId);
       if (!album) return;
@@ -150,7 +286,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         album.photos.forEach((photoUrl, index) => {
           const wrapper = document.createElement('div');
-          wrapper.className = 'mb-[12px] break-inside-avoid';
+          wrapper.className = 'mb-[12px] break-inside-avoid reveal';
+          const delayClass = index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : '';
+          if (delayClass) wrapper.classList.add(delayClass);
           
           const img = document.createElement('img');
           img.src = photoUrl;
@@ -161,6 +299,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           
           wrapper.appendChild(img);
           masonryGrid.appendChild(wrapper);
+          observer.observe(wrapper);
         });
         
         galleryGrid!.appendChild(masonryGrid);

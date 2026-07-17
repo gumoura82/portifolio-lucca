@@ -4,19 +4,53 @@
 @theme {
   --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Georgia", serif;
+  
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+  --animate-fade-in: fade-in 0.8s ease-out forwards;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 }
+
+/* Animations for scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
 
 .masonry-grid {
   column-count: 1;
   column-gap: 12px;
 }
-
 @media (min-width: 640px) {
   .masonry-grid {
     column-count: 2;
   }
 }
-
 @media (min-width: 1024px) {
   .masonry-grid {
     column-count: 3;
