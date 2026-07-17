@@ -52,6 +52,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-link');
 
+  // --- Lightbox Modal Logic ---
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+
+  function openLightbox(imgSrc: string) {
+    if (lightboxModal && lightboxImage) {
+      lightboxImage.src = imgSrc;
+      lightboxModal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+  }
+
+  function closeLightbox() {
+    if (lightboxModal && lightboxImage) {
+      lightboxModal.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => { lightboxImage.src = ''; }, 300);
+    }
+  }
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', closeLightbox);
+  }
+  if (lightboxModal) {
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) closeLightbox();
+    });
+  }
+
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('opacity-0');
@@ -293,9 +321,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           const img = document.createElement('img');
           img.src = photoUrl;
           img.alt = `${album.title} - Foto ${index + 1}`;
-          img.className = 'w-full bg-[#111] border border-white/10';
+          img.className = 'w-full bg-[#111] border border-white/10 cursor-pointer transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl relative z-10';
           img.loading = 'lazy';
           img.referrerPolicy = 'no-referrer';
+          img.addEventListener('click', () => openLightbox(photoUrl));
           
           wrapper.appendChild(img);
           masonryGrid.appendChild(wrapper);
